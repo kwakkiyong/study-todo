@@ -2,10 +2,10 @@ import Button from "./html/Button.tsx";
 import Checkbox from "./html/Checkbox.tsx";
 import SvgPencil from "./svg/SvgPencil.tsx";
 import SvgClose from "./svg/SvgClose.tsx";
-import {useState} from "react";
+import {memo, useState} from "react";
 import Input from "./html/Input.tsx";
 
-export default function TodoListItem({todo, toggleTodo, deleteTodo, modifyTodo}: {
+export default memo(function TodoListItem({todo, toggleTodo, deleteTodo, modifyTodo}: {
     todo: Todo;
     toggleTodo: (id: number) => void;
     deleteTodo: (id: number) => void;
@@ -22,6 +22,8 @@ export default function TodoListItem({todo, toggleTodo, deleteTodo, modifyTodo}:
             modifyTodo(todo.id, modifyTitle);
         }
     };
+
+    console.log('TodoListItem rendering!!')
 
     return (
         /* 할 일 목록이 있을 때 */
@@ -46,4 +48,4 @@ export default function TodoListItem({todo, toggleTodo, deleteTodo, modifyTodo}:
             </div>
         </li>
     );
-}
+});
