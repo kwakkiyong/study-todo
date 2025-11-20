@@ -1,8 +1,10 @@
 import Input from "./html/Input.tsx";
 import Button from "./html/Button.tsx";
 import {useState} from "react";
+import {useTodoStore} from "../store/todoStore.ts";
 
-export default function TodoEditor({addTodo}: { addTodo: (title: string) => void; }) {
+export default function TodoEditor() {
+    const addTodo = useTodoStore((state) => state.addTodo);
     const [text, setText] = useState('');
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

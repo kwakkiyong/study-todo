@@ -1,12 +1,10 @@
 import TodoListItemEmpty from "./TodoListItemEmpty.tsx";
 import TodoListItem from "./TodoListItem.tsx";
+import {useTodoStore} from "../store/todoStore.ts";
 
-export default function TodoList({ todos, toggleTodo, deleteTodo, modifyTodo }: {
-    todos: Todo[];
-    toggleTodo: (id: number) => void;
-    deleteTodo: (id: number) => void;
-    modifyTodo: (id: number, title: string) => void;
-}) {
+export default function TodoList() {
+    const todos = useTodoStore((state) => state.todos);
+
     return (
         <ul className="todo__list">
             {/* 할 일 목록이 없는 경우 */}
@@ -14,8 +12,7 @@ export default function TodoList({ todos, toggleTodo, deleteTodo, modifyTodo }: 
 
             {/* 할 일 목록이 있을 때 */}
             {todos.length !== 0 && (
-                todos.map((todo) => <TodoListItem key={todo.id} todo={todo} toggleTodo={toggleTodo}
-                                                  deleteTodo={deleteTodo} modifyTodo={modifyTodo} />)
+                todos.map((todo) => <TodoListItem key={todo.id} todo={todo}/>)
             )}
         </ul>
     );

@@ -4,13 +4,13 @@ import SvgPencil from "./svg/SvgPencil.tsx";
 import SvgClose from "./svg/SvgClose.tsx";
 import {memo, useState} from "react";
 import Input from "./html/Input.tsx";
+import {useTodoStore} from "../store/todoStore.ts";
 
-export default memo(function TodoListItem({todo, toggleTodo, deleteTodo, modifyTodo}: {
-    todo: Todo;
-    toggleTodo: (id: number) => void;
-    deleteTodo: (id: number) => void;
-    modifyTodo: (id: number, title: string) => void;
-}) {
+export default memo(function TodoListItem({todo}: { todo: Todo; }) {
+    const deleteTodo = useTodoStore((state) => state.deleteTodo);
+    const toggleTodo = useTodoStore((state) => state.toggleTodo);
+    const modifyTodo = useTodoStore((state) => state.modifyTodo);
+
     const [isModify, setIsModify] = useState(false);
     const [modifyTitle, setModifyTitle] = useState('');
 
@@ -22,8 +22,6 @@ export default memo(function TodoListItem({todo, toggleTodo, deleteTodo, modifyT
             modifyTodo(todo.id, modifyTitle);
         }
     };
-
-    console.log('TodoListItem rendering!!')
 
     return (
         /* 할 일 목록이 있을 때 */
